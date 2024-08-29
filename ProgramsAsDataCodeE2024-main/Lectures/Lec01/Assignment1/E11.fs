@@ -42,18 +42,23 @@ let rec eval e (env : (string * int) list) : int =
     match e with
     | CstI i            -> i
     | Var x             -> lookup env x 
-    | Prim("+", e1, e2) -> eval e1 env + eval e2 env
-    | Prim("*", e1, e2) -> eval e1 env * eval e2 env
-    | Prim("-", e1, e2) -> eval e1 env - eval e2 env
-    | Prim("==", e1, e2) -> if eval e1 env = eval e2 env then 1 else 0
-    | Prim("Max", e1, e2) -> 
-        if eval e1 env < eval e2 env then eval e2 env
-        elif eval e2 env < eval e1 env then eval e1 env
-        else eval e1 env
-    | Prim("Min", e1, e2) -> 
-        if eval e1 env < eval e2 env then eval e1 env
-        elif eval e2 env < eval e1 env then eval e2 env
-        else eval e1 env
+    | Prim(op, e1, e2) ->
+        let i1 = eval e1 env
+        let i2 = eval e2 env
+        match op with
+        | "-"     -> i1 - i2
+        | "*"     -> i1 * i2
+        | "+"     -> i1 + i2
+        | "=="    -> if i1 = i2 then 1 else 0
+        | "Max"   -> 
+            if i1 < i2 then i2
+            elif i2 < i1 then i1
+            else i1
+        | "Min"     -> 
+            if i1 < i2 then i1
+            elif i2 < i1 then i2
+            else i1
+        | _    -> failwith "unknown operator"
     | Prim _            -> failwith "unknown primitive";;
 
 let e1v  = eval e1 env;;
