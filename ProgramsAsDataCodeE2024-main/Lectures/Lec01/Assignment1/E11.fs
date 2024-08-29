@@ -36,6 +36,7 @@ let e4 = Prim("==", Prim("Max", CstI 7, CstI 10), Prim("Min", CstI 13, CstI 10))
 
 let e5 = Prim("==", Prim("Max", CstI 7, CstI 9), Prim("Min", CstI 13, CstI 10));;
 
+let e6 = If(Var "a", CstI 11, CstI 22) 
 
 (* Evaluation within an environment *)
 
