@@ -11,6 +11,7 @@
     | Var of string
     | Let of (string * expr) list * expr (* CHANGED *)
     | Prim of string * expr * expr
+
     28 2 Interpreters and Compilers
     so that the Let constructor takes a list of bindings, where a binding is a pair of a
     variable name and an expression. The example above would be represented as:
@@ -19,10 +20,15 @@
     extended with multiple sequential let-bindings.
 *)
 
+(*
+    erhs = expression right hand side
+    ebody = expression body
+*)
+
 type expr = 
   | CstI of int
   | Var of string
-  | Let of (string * expr) list * expr //Changed bit
+  | Let of (string * expr) list * expr //Changed from Let of string * expr * ecpr
   | Prim of string * expr * expr
 
 let rec lookup env x =
@@ -34,10 +40,15 @@ let rec eval e (env : (string * int) list) : int =
     match e with
     | CstI i              -> i
     | Var x               -> lookup env x 
-    | Let(x, erhs, ebody) -> 
-      let xval = eval erhs env
-      let env1 = (x, xval) :: env 
-      eval ebody env1
+    | Let(lst, ebody) -> //Changes in this method
+        let rec aux lst env = 
+            match lst with
+                | [] ->  env
+                | (x, erhs) :: xs -> 
+                    let xval = eval erhs env
+                    let env1 = (x, xval) :: env
+                    aux xs env1
+        eval ebody (aux lst env)
     | Prim("+", e1, e2) -> eval e1 env + eval e2 env
     | Prim("*", e1, e2) -> eval e1 env * eval e2 env
     | Prim("-", e1, e2) -> eval e1 env - eval e2 env
