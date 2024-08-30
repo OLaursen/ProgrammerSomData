@@ -1,5 +1,6 @@
 (*
-    Exercise 2.1 Extend the expression language expr from Intcomp1.fs with
+    Exercise 2.1 
+    Extend the expression language expr from Intcomp1.fs with
     multiple sequential let-bindings, such as this (in concrete syntax):
     let x1 = 5+7 x2 = x1*2 in x1+x2 end
     To evaluate this, the right-hand side expression 5+7 must be evaluated and bound
@@ -56,3 +57,27 @@ let rec eval e (env : (string * int) list) : int =
     | Prim("*", e1, e2) -> eval e1 env * eval e2 env
     | Prim("-", e1, e2) -> eval e1 env - eval e2 env
     | Prim _            -> failwith "unknown primitive";;
+
+(*
+    Exercise 2.2
+    Revise the function freevars : expr -> string list to
+    work for the language as extended in Exercise 2.1. Note that the example expression
+    in the beginning of Exercise 2.1 has no free variables, but let x1 = x1+7 in
+    x1+8 end has the free variable x1, because the variable x1 is bound only in the
+    body (x1+8), not in the right-hand side (x1+7), of its own binding. There are
+    programming languages where a variable can be used in the right-hand side of its
+    own binding, but ours is not such a language.
+*)
+
+let rec minus (xs, ys) = 
+    match xs with 
+    | []    -> []
+    | x::xr -> if mem x ys then minus(xr, ys)
+               else x :: minus (xr, ys);;
+let rec freevars e : string list =
+    match e with
+    | CstI i -> []
+    | Var x  -> [x]
+    | Let(x, erhs, ebody) -> //changes start here 
+          union (freevars erhs, minus (freevars ebody, [x]))
+    | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
