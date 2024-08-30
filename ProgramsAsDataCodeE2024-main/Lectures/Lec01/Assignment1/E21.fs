@@ -25,11 +25,14 @@
     ebody = expression body
 *)
 
+//Test expressions
+let e1 = Let([("x1", Prim("+", CstI 5, CstI 7)); ("x2", Prim("*", Var "x1", CstI 2))], Prim("+", Var "x1", Var "x2"))
+let e2 = Let([("z", CstI 17)], Prim("+", Var "z", Var "z"));;
 type expr = 
   | CstI of int
   | Var of string
   | Let of (string * expr) list * expr //Changed from Let of string * expr * ecpr
-  | Prim of string * expr * expr
+  | Prim of string * expr * expr;;
 
 let rec lookup env x =
     match env with 
@@ -40,7 +43,7 @@ let rec eval e (env : (string * int) list) : int =
     match e with
     | CstI i              -> i
     | Var x               -> lookup env x 
-    | Let(lst, ebody) -> //Changes in this method
+    | Let(lst, ebody) -> //Changes start here
         let rec aux lst env = 
             match lst with
                 | [] ->  env
@@ -48,7 +51,7 @@ let rec eval e (env : (string * int) list) : int =
                     let xval = eval erhs env
                     let env1 = (x, xval) :: env
                     aux xs env1
-        eval ebody (aux lst env)
+        eval ebody (aux lst env) //Changes end here
     | Prim("+", e1, e2) -> eval e1 env + eval e2 env
     | Prim("*", e1, e2) -> eval e1 env * eval e2 env
     | Prim("-", e1, e2) -> eval e1 env - eval e2 env
