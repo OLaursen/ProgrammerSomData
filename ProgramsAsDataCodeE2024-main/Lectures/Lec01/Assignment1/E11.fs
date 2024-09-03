@@ -29,6 +29,8 @@ type aexpr =
   | Add of aexpr * aexpr
   | Mul of aexpr * aexpr
   | Sub of aexpr * aexpr
+  | Pow of aexpr * aexpr
+  | Div of aexpr * aexpr;;
 
 let ae1 = Sub(Var "v", Add(Var "W", Var "z"));;
 
@@ -46,25 +48,62 @@ let ae7 = Mul(CstI 1, Var "x");;
 
 let ae8 = Sub(Var "x", Var "x");;
 
+let ae9 = Add(CstI 1, Mul(CstI 2, CstI 3 ));
+
+let ae10 = Mul(CstI 0, Add(CstI 2, CstI 3 ));;
+
+let ae11 = Add(CstI 1, Mul(CstI 0, CstI 3 ));
+
+let ae12 = Mul(Add(CstI 1, CstI 0), Add(Var "x", CstI 0));;
+
+
+
 let rec fmt (e : aexpr) : string =
     match e with
     | CstI i -> string i
     | Var x  -> x
     | Add(e1, e2) -> "(" + fmt e1 + " + " + fmt e2 + ")"
     | Mul(e1, e2) -> "(" + fmt e1 + " * " + fmt e2 + ")"
-    | Sub(e1, e2) -> "(" + fmt e1 + " - " + fmt e2 + ")";;
+    | Sub(e1, e2) -> "(" + fmt e1 + " - " + fmt e2 + ")"
+    | Pow(e1, e2) -> "(" + fmt e1 + " ^ " + fmt e2 + ")"
+    | Div(e1, e2) -> "(" + fmt e1 + " / " + fmt e2 + ")";;
 
-let rec simplify (e : aexpr) : string =
+let rec simplify (e : aexpr) : aexpr =
     match e with
     | Add(CstI 0, e2) -> simplify e2
     | Add(e1, CstI 0) -> simplify e1
     | Sub(e1, CstI 0) -> simplify e1
-    | Sub(e1, e2) when e1 = e2 -> "0"
-    | Mul(CstI 0, e2) -> "0"
-    | Mul(e1, CstI 0) -> "0"
+    | Sub(e1, e2) when e1 = e2 -> CstI 0
+    | Mul(CstI 0, e2) -> CstI 0
+    | Mul(e1, CstI 0) -> CstI 0
     | Mul(CstI 1, e2) -> simplify e2
     | Mul(e1, CstI 1) -> simplify e1
-    | _ -> fmt e;;
+    | Add(e1, e2) -> Add(simplify e1, simplify e2)
+    | Mul(e1, e2) -> Mul(simplify e1, simplify e2)
+    | Sub(e1, e2) -> Sub(simplify e1, simplify e2)
+    | Pow(e1, CstI 0) -> CstI 1
+    | Pow(e1, CstI 1) -> simplify e1
+    | Div(e1, e2) -> Div(simplify e1, simplify e2)
+    | _ -> e;;
+
+let rec differentiate (expr : aexpr) : aexpr =
+    match expr with
+    // Derivative of a constant is 0
+    | CstI i -> CstI 0
+    // Derivative of a variable is 1
+    | Var x -> CstI 1
+    // Derivative of a sum is the sum of the derivatives
+    | Add(e1,e2) -> Add(differentiate (e1), differentiate(e2))
+    // Derivative of a product is the product rule
+    | Mul(e1,e2) -> Add(Mul(differentiate(e1), e2), Mul(e1, differentiate(e2)))
+    // Derivative of a difference is the difference of the derivatives
+    | Sub(e1,e2) -> Sub(differentiate (e1), differentiate(e2))
+    // Derivative of a power is the power rule
+    | Pow(e1,e2) -> Mul(e2, Pow(e1, Sub(e2, CstI 1)))
+    // In all other cases, return the expression unchanged (shouldn't occur in basic cases)
+    | _ -> expr;;
+
+let difTest = differentiate(Add(Add(Pow(Var "x", CstI 2), Mul(CstI 3, Var "x")), CstI 3));;
 
 type expr = 
   | CstI of int
