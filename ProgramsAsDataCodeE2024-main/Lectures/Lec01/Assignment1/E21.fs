@@ -101,13 +101,13 @@ let rec freevars e : string list =
     | CstI i -> []
     | Var x  -> [x]
     | Let(lst, ebody) -> //changes start here 
-            let rec aux lst freeV bound =
+            let rec aux lst freeV boundV =
                 match lst with
                 | (x, erhs) :: xs -> 
-                        let newBound = x :: bound
-                        aux xs (union (minus (freevars erhs, bound), freeV)) newBound //Check om x er i body, hvis ja så gør ikek noget hvis nej så tilføj til liste (freevars) 
+                        let newBoundV = x :: boundV
+                        aux xs (union (minus (freevars erhs, boundV), freeV)) newBoundV 
                 | [] -> 
-                    minus (freevars ebody, bound) @ freeV
+                    minus (freevars ebody, boundV) @ freeV
             aux lst [] [] //changes end here
           //union (freevars erhs, minus (freevars ebody, [x]))
     | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
@@ -134,7 +134,7 @@ let rec tcomp (e : expr) (cenv : string list) : texpr =
     match e with
     | CstI i -> TCstI i
     | Var x -> TVar (getindex cenv x)
-    | Let(lst, ebody) ->
+    | Let(lst, ebody) -> //changes here
         // Recursively process all bindings in lst
         let rec aux bindings cenv =
             match bindings with
