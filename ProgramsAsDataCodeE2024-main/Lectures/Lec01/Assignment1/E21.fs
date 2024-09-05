@@ -123,7 +123,7 @@ type texpr =                            (* target expressions *)
 
 let rec getindex vs x = 
     match vs with 
-    | []    -> failwith "Variable not found"
+    | []    -> failwithf "Variable %s not found" (string x)
     | y::yr -> if x=y then 0 else 1 + getindex yr x;;
 
 (* Compiling from expr to texpr *)
