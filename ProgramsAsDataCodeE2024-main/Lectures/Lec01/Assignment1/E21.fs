@@ -28,6 +28,8 @@
 
 //Test expressions
 let e1 = Let([("x1", Prim("+", CstI 5, CstI 7)); ("x2", Prim("*", Var "x1", CstI 2))], Prim("+", Var "x1", Var "x2"))
+//let x1 = 5+7 in x2 = x1 * 2 in x1*x2 
+let e3 = Let([("x2", Prim("*", Var "x1", CstI 2))], Prim("+", Var "x1", Var "x2"))
 let e2 = Let([("z", CstI 17)], Prim("+", Var "z", Var "z"));;
 type expr = 
   | CstI of int
@@ -68,16 +70,30 @@ let rec eval e (env : (string * int) list) : int =
     programming languages where a variable can be used in the right-hand side of its
     own binding, but ours is not such a language.
 *)
-
+let rec mem x vs = 
+    match vs with
+    | []      -> false
+    | v :: vr -> x=v || mem x vr;;
 let rec minus (xs, ys) = 
     match xs with 
     | []    -> []
     | x::xr -> if mem x ys then minus(xr, ys)
                else x :: minus (xr, ys);;
+let rec union (xs, ys) = 
+    match xs with 
+    | []    -> ys
+    | x::xr -> if mem x ys then union(xr, ys)
+               else x :: union(xr, ys);;
 let rec freevars e : string list =
     match e with
     | CstI i -> []
     | Var x  -> [x]
-    | Let(x, erhs, ebody) -> //changes start here 
-          union (freevars erhs, minus (freevars ebody, [x]))
+    | Let(lst, ebody) -> //changes start here 
+            let rec aux lst freeV =
+                match lst with
+                | [] -> freeV
+                | (x, erhs) :: xs -> 
+                                    aux xs ((union (freevars erhs, minus(freevars ebody, [x]))) :: freeV)  //Check om x er i body, hvis ja så gør ikek noget hvis nej så tilføj til liste (freevars) 
+            aux lst []
+          //union (freevars erhs, minus (freevars ebody, [x]))
     | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
