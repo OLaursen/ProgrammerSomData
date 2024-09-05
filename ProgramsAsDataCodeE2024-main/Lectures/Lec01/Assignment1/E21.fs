@@ -101,11 +101,63 @@ let rec freevars e : string list =
     | CstI i -> []
     | Var x  -> [x]
     | Let(lst, ebody) -> //changes start here 
-            let rec aux lst freeV =
+            let rec aux lst freeV bound =
                 match lst with
-                | [] -> freeV
                 | (x, erhs) :: xs -> 
-                                    aux xs ((union (freevars erhs, minus(freevars ebody, [x]))) @ freeV)  //Check om x er i body, hvis ja så gør ikek noget hvis nej så tilføj til liste (freevars) 
-            aux lst [] //changes end here
+                        let newBound = x :: bound
+                        aux xs (union (minus (freevars erhs, bound), freeV)) newBound //Check om x er i body, hvis ja så gør ikek noget hvis nej så tilføj til liste (freevars) 
+                | [] -> 
+                    minus (freevars ebody, bound) @ freeV
+            aux lst [] [] //changes end here
           //union (freevars erhs, minus (freevars ebody, [x]))
     | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
+
+
+type texpr =                            (* target expressions *)
+  | TCstI of int
+  | TVar of int                         (* index into runtime environment *)
+  | TLet of texpr * texpr               (* erhs and ebody                 *)
+  | TPrim of string * texpr * texpr;;
+
+(* Map variable name to variable index at compile-time *)
+
+let rec getindex vs x = 
+    match vs with 
+    | []    -> failwith "Variable not found"
+    | y::yr -> if x=y then 0 else 1 + getindex yr x;;
+
+(* Compiling from expr to texpr *)
+//let e5 = Let([("x1", Prim("+", CstI 5, CstI 7)); ("x2", Prim("*", Var "x1", Var "z"))], Prim("+", Var "x1", Var "x2"))
+let e10 = Let([("x", CstI 10); ("y", Prim("+", Var "x", CstI 5))], Prim("*", Var "x", Var "y"))
+
+let rec tcomp (e : expr) (cenv : string list) : texpr =
+    match e with
+    | CstI i -> TCstI i
+    | Var x -> TVar (getindex cenv x)
+    | Let(lst, ebody) ->
+        // Recursively process all bindings in lst
+        let rec aux bindings cenv =
+            match bindings with
+            | [] -> tcomp ebody cenv  // Compile the body with the updated environment bindings
+            | (x, erhs) :: xs -> 
+                let compRight = tcomp erhs cenv  // Compile the right-hand side of the current binding
+                let newCenv = x :: cenv  // Add the new variable to the environment
+                TLet(compRight, aux xs newCenv)  // Compile the remaining bindings
+        aux lst cenv
+    | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv)
+
+(* Evaluation of target expressions with variable indexes.  The
+   run-time environment renv is a list of variable values (ints).  *)
+
+let rec teval (e : texpr) (renv : int list) : int =
+    match e with
+    | TCstI i -> i
+    | TVar n  -> List.item n renv
+    | TLet(erhs, ebody) -> 
+      let xval = teval erhs renv
+      let renv1 = xval :: renv 
+      teval ebody renv1 
+    | TPrim("+", e1, e2) -> teval e1 renv + teval e2 renv
+    | TPrim("*", e1, e2) -> teval e1 renv * teval e2 renv
+    | TPrim("-", e1, e2) -> teval e1 renv - teval e2 renv
+    | TPrim _            -> failwith "unknown primitive";;
