@@ -75,5 +75,5 @@ let assemble (inss : sinstr list) : int list =
 
 let intsToFile (inss : int list) =
       let text = String.concat " " (List.map string inss)
-      System.IO.File.WriteAllText("is1.txt", text)
+      System.IO.File.WriteAllText("../is1.txt", text)
 
