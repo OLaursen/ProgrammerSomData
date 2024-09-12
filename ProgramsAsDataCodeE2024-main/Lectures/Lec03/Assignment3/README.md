@@ -25,4 +25,22 @@ of the sequence of grammar rules (A–I) used.
 # Exercise 3.4
 Draw the above derivation as a tree.
 
+```
+                            __________________________ MAIN ____________________________
+                          /                                                             \                          
+           _____________ EXP ______________ _____________________                       EOF
+          /               |                \                     \
+      LET NAME           IN               EXP                   EXP
+         |                                 |                     |
+       NAME Z                         CSTINT 17        ____________________
+                                                      /          |          \
+                                                    EXP        PLUS        EXP
+                                                     |                       |
+                                                   NAME Z            _________________
+                                                                    /        |        \
+                                                                  EXP     TIMES      EXP
+                                                                   |                  |
+                                                                CSTINT 2           CSTINT 3        
+```
+
 
