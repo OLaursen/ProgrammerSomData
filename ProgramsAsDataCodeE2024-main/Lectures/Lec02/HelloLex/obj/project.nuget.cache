@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mdOmDCGPDC6fQAQmkl1W3a85hLKPfGxAf8bdseKYq8+xi0LlsqzT5I1w8jAquEBlsFr31gOLfDP7SPDPXK+1aw==",
+  "success": true,
+  "projectFilePath": "/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec02/HelloLex/hello.fsproj",
+  "expectedPackageFiles": [
+    "/Users/oliverlaursen/.nuget/packages/fsharp.core/8.0.200/fsharp.core.8.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}
