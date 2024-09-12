@@ -10,6 +10,17 @@ of the sequence of grammar rules (A–I) used.
 
 ```
     LET z EQ CSTINT 17 IN z PLUS CSTINT 2 TIMES CSTINT 3 END
+    
+    Main =>
+    Expr EOF => 
+    Let Name z EQ Expr IN Expr END EOF => 
+    Let Name z EQ Expr IN Expr Plus Expr END EOF =>  
+    Let Name z EQ Expr IN Expr Plus Expr Times Expr END EOF => 
+    Let Name z EQ Expr IN Expr Plus Expr Times CSTINT 3 END EOF => 
+    Let Name z EQ Expr IN Expr Plus CSTINT 2 Times CSTINT 3 END EOF => 
+    Let Name z EQ Expr IN Name z Plus CSTINT 2 Times CSTINT 3 END EOF => 
+    Let Name z EQ CSTINT 17 IN Name z Plus CSTINT 2 Times CSTINT 3 END EOF =>
+    
 ```
 # Exercise 3.4
 Draw the above derivation as a tree.
