@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "QSbwz5mnN6x6LX8bfXF9zXOaSQVgkaP8mj8gTjwHONXS1IHagUsV/X77006zUNNbTq7Qi8C62poNHILdN0Pm0w==",
+  "success": true,
+  "projectFilePath": "/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec02/HelloLex/hello3.fsproj",
+  "expectedPackageFiles": [
+    "/Users/oliverlaursen/.nuget/packages/fsharp.core/8.0.200/fsharp.core.8.0.200.nupkg.sha512",
+    "/Users/oliverlaursen/.nuget/packages/fslexyacc/11.3.0/fslexyacc.11.3.0.nupkg.sha512",
+    "/Users/oliverlaursen/.nuget/packages/fslexyacc.runtime/11.3.0/fslexyacc.runtime.11.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,5 +1,0 @@
-/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec02/HelloLex/obj/Debug/net8.0/hello.fsproj.AssemblyReference.cache
-/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec02/HelloLex/obj/Debug/net8.0/hello.AssemblyInfoInputs.cache
-/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec02/HelloLex/obj/Debug/net8.0/hello.AssemblyInfo.fs
-/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec02/HelloLex/obj/Debug/net8.0/hello.fsproj.CoreCompileInputs.cache
-/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec02/HelloLex/obj/Debug/net8.0/hello.sourcelink.json
