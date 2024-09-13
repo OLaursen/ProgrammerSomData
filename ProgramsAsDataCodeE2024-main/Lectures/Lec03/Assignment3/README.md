@@ -29,10 +29,10 @@ Draw the above derivation as a tree.
                             __________________________ MAIN ____________________________
                           /                                                             \                          
            _____________ EXP ______________ _____________________                       EOF
-          /               |                \                     \
-      LET NAME           IN               EXP                   EXP
+          /               |                \          \          \
+      LET NAME           EQ               EXP         IN         EXP
          |                                 |                     |
-       NAME Z                         CSTINT 17        ____________________
+       NAME Z                          CSTINT 17       ____________________
                                                       /          |          \
                                                     EXP        PLUS        EXP
                                                      |                       |
