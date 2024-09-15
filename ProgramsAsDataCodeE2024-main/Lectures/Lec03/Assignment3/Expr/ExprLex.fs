@@ -7,7 +7,7 @@
 
 module ExprLex
 
-open Microsoft.FSharp.Text.Lexing
+open FSharp.Text.Lexing
 open ExprPar
 
 let lexemeAsString lexbuf = 

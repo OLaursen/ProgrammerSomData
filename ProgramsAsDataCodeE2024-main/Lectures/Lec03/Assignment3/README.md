@@ -78,4 +78,6 @@ Use the expression parser from Parse.fs and the compiler scomp
 Expr.fs, to define a function compString : string -> sinstr list
 that parses a string as an expression and compiles it to stack machine code.
 
+Look at the function in E3_6.fs
+
 
