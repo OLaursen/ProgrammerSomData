@@ -1,5 +1,6 @@
 (* File Expr/Parse.fs *)
 (* Lexing and parsing of simple expressions using fslex and fsyacc *)
+module Parse
 
 open System
 open System.IO
