@@ -1,0 +1,5 @@
+/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec03/Assignment3/Expr/obj/Debug/net8.0/Expr.fsproj.AssemblyReference.cache
+/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec03/Assignment3/Expr/obj/Debug/net8.0/Expr.AssemblyInfoInputs.cache
+/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec03/Assignment3/Expr/obj/Debug/net8.0/Expr.AssemblyInfo.fs
+/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec03/Assignment3/Expr/obj/Debug/net8.0/Expr.fsproj.CoreCompileInputs.cache
+/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec03/Assignment3/Expr/obj/Debug/net8.0/Expr.sourcelink.json
