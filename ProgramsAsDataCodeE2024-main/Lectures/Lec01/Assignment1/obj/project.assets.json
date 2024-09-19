@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\sevem\\.nuget\\packages\\": {}
+    "/Users/oliverlaursen/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sevem\\Documents\\GitHub\\ProgrammerSomData\\ProgramsAsDataCodeE2024-main\\Lectures\\Lec01\\Assignment1\\Assignment1.csproj",
+      "projectUniqueName": "/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec01/Assignment1/Assignment1.csproj",
       "projectName": "Assignment1",
-      "projectPath": "C:\\Users\\sevem\\Documents\\GitHub\\ProgrammerSomData\\ProgramsAsDataCodeE2024-main\\Lectures\\Lec01\\Assignment1\\Assignment1.csproj",
-      "packagesPath": "C:\\Users\\sevem\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sevem\\Documents\\GitHub\\ProgrammerSomData\\ProgramsAsDataCodeE2024-main\\Lectures\\Lec01\\Assignment1\\obj\\",
+      "projectPath": "/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec01/Assignment1/Assignment1.csproj",
+      "packagesPath": "/Users/oliverlaursen/.nuget/packages/",
+      "outputPath": "/Users/oliverlaursen/Desktop/5Semester/Programmer som data/ProgrammerSomData/ProgramsAsDataCodeE2024-main/Lectures/Lec01/Assignment1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\sevem\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/oliverlaursen/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
