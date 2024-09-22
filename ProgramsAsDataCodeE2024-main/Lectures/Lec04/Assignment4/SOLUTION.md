@@ -18,13 +18,10 @@ let pow x = if x = 0 then 1 else 3 * pow(x - 1) in pow 8 end
 • Compute 3^0 + 3^1 + · · · + 3^10 + 3^11, using a recursive function (or two, if you
 prefer).
 
-//TODO pow bliver ikke fundet, så vi skal ændre måden vi anvender pow i powsum...
+let pow x =  if x = 0 then 1 else 3 * pow(x - 1) in let powsum x = if x = 0 then 1 else (pow x) + powsum (x-1) in powsum 11 end end
 
+• Compute 1^8 + 2^8 +· · ·+10^8, again using a recursive function (or two).
 
 let pow x =  if x = 0 then 1 else 3 * pow(x - 1) in let powsum x = if x = 0 then 1 else (pow x) + powsum (x-1) in powsum 11 end end
 
-• Compute 18 + 28 +· · ·+108, again using a recursive function (or two).
-
-
-
-
+let pow8 x = x*x*x*x*x*x*x*x in let sum x = if x = 1 then 1 else (pow8 x) + sum(x - 1) in sum 10 end end
