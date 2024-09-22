@@ -20,7 +20,8 @@ prefer).
 
 //TODO pow bliver ikke fundet, så vi skal ændre måden vi anvender pow i powsum...
 
-let powsum x = if x = 0 then 1 else let pow = if x = 0 then 1 else 3 * pow (x - 1) in (pow x) + powsum (x-1) end in powsum 11 end
+
+let pow x =  if x = 0 then 1 else 3 * pow(x - 1) in let powsum x = if x = 0 then 1 else (pow x) + powsum (x-1) in powsum 11 end end
 
 • Compute 18 + 28 +· · ·+108, again using a recursive function (or two).
 
