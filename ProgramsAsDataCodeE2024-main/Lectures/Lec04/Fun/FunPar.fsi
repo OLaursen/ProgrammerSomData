@@ -60,7 +60,9 @@ type nonTerminalId =
     | NONTERM__startMain
     | NONTERM_Main
     | NONTERM_Expr
+    | NONTERM_Args1
     | NONTERM_AtExpr
+    | NONTERM_Args
     | NONTERM_AppExpr
     | NONTERM_Const
 /// This function maps tokens to integer indexes

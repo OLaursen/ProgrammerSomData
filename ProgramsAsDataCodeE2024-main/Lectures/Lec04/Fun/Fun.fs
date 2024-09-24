@@ -22,12 +22,7 @@ let rec lookup env x =
 
 (* A runtime value is an integer or a function closure *)
 
-let accEArg eArg env =
-  let rec aux xVals env= 
-      match eArg with
-      | x::xs -> aux (eval eArg env :: xVals) env
-      | [] -> xVals
-  aux [] env
+
 
 type value = 
   | Int of int
@@ -67,13 +62,17 @@ let rec eval (e : expr) (env : value env) : int =
       match fClosure with
       | Closure (f, x, fBody, fDeclEnv) ->
         let xVals = accEArg eArg env
-        let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
-        let fBodyEnv = (List.zip x xVals) :: (f, fClosure) :: fDeclEnv
+        let fBodyEnv = (List.zip x xVals) @ [(f, fClosure)] @ fDeclEnv
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "eval Call: not first-order function"
 
-
+and accEArg eArg env =
+  let rec aux (list:expr list) env (acc:value list)= 
+      match list with
+      | x::xs -> aux xs env ([Int(eval x env)] @ acc)
+      | [] -> acc
+  aux eArg env []
 
 (* Evaluate in empty environment: program must have no free variables: *)
 
@@ -81,7 +80,7 @@ let run e = eval e [];;
 
 (* Examples in abstract syntax *)
 
-let ex1 = Letfun("f1", "x", Prim("+", Var "x", CstI 1), 
+(*let ex1 = Letfun("f1", "x", Prim("+", Var "x", CstI 1), 
                  Call(Var "f1", CstI 12));;
 
 (* Example: factorial *)
@@ -123,7 +122,8 @@ let ex5 =
                           Call(Var "fib", Prim("-", Var "n", CstI 1)),
                           Call(Var "fib", Prim("-", Var "n", CstI 2))),
                      CstI 1), Call(Var "fib", CstI 25)));;
-                     
+                     *)
+
 let sum n = 
    let rec aux acc n =        
      match n with 
