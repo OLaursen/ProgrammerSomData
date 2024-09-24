@@ -70,7 +70,7 @@ let rec eval (e : expr) (env : value env) : int =
 and accEArg eArg env =
   let rec aux (list:expr list) env (acc:value list)= 
       match list with
-      | x::xs -> aux xs env ([Int(eval x env)] @ acc)
+      | x::xs -> aux xs env (acc @ [Int(eval x env)])
       | [] -> acc
   aux eArg env []
 
