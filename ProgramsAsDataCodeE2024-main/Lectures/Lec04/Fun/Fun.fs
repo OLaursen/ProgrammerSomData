@@ -22,9 +22,16 @@ let rec lookup env x =
 
 (* A runtime value is an integer or a function closure *)
 
+let accEArg eArg env =
+  let rec aux xVals env= 
+      match eArg with
+      | x::xs -> aux (eval eArg env :: xVals) env
+      | [] -> xVals
+  aux [] env
+
 type value = 
   | Int of int
-  | Closure of string * string * expr * value env       (* (f, x, fBody, fDeclEnv) *)
+  | Closure of string * (string list) * expr * value env       (* (f, x, fBody, fDeclEnv) *)
 
 let rec eval (e : expr) (env : value env) : int =
     match e with 
@@ -59,11 +66,14 @@ let rec eval (e : expr) (env : value env) : int =
       let fClosure = lookup env f
       match fClosure with
       | Closure (f, x, fBody, fDeclEnv) ->
-        let xVal = Int(eval eArg env)
+        let xVals = accEArg eArg env
         let fBodyEnv = (x, xVal) :: (f, fClosure) :: fDeclEnv
+        let fBodyEnv = (List.zip x xVals) :: (f, fClosure) :: fDeclEnv
         eval fBody fBodyEnv
       | _ -> failwith "eval Call: not a function"
     | Call _ -> failwith "eval Call: not first-order function"
+
+
 
 (* Evaluate in empty environment: program must have no free variables: *)
 
