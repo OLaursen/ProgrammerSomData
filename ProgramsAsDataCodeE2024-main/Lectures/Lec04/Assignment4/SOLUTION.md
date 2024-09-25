@@ -25,3 +25,6 @@ let pow x =  if x = 0 then 1 else 3 * pow(x - 1) in let powsum x = if x = 0 then
 let pow x =  if x = 0 then 1 else 3 * pow(x - 1) in let powsum x = if x = 0 then 1 else (pow x) + powsum (x-1) in powsum 11 end end
 
 let pow8 x = x*x*x*x*x*x*x*x in let sum x = if x = 1 then 1 else (pow8 x) + sum(x - 1) in sum 10 end end
+
+# 4.5
+Check FunPar.fsy and FunLex.fsl. 
