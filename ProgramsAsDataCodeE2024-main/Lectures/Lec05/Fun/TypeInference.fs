@@ -107,6 +107,7 @@ let rec freeTypeVars t : typevar list =
     | TypI        -> []
     | TypB        -> []
     | TypV tv     -> (*(printfn "%s" ("found free tyvar"));*) [tv]
+    | TypL x      -> freeTypeVars x
     | TypF(t1,t2) -> union(freeTypeVars t1, freeTypeVars t2)
 
 let occurCheck tyvar tyvars =                     
@@ -149,6 +150,7 @@ let rec showType t : string =
           match !tyvar with
           | (NoLink name, _) -> name
           | _                -> failwith "showType impossible"
+        | TypL x       ->  showType x + " list"
         | TypF(t1, t2) -> "(" + pr t1 + " -> " + pr t2 + ")"
     pr t 
 
