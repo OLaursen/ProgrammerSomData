@@ -114,3 +114,7 @@ let ex5 =
                           Call(Var "fib", Prim("-", Var "n", CstI 2))),
                      CstI 1), Call(Var "fib", CstI 25)));;
                      
+
+let merge (lists: int list * int list) : int list =
+    let merged = fst lists @ snd lists
+    List.sort(merged)
