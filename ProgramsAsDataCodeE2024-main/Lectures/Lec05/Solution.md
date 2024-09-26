@@ -4,13 +4,15 @@
 ## B
 
 ```Csharp
-    static int[](int[] xs, int[] ys)
+    static int[] merge(int[] xs, int[] ys)
     {
-        int[] result = new int[xs.Length+ys.Length-1];
+        int[] result = new int[xs.Length + ys.Length - 1];
         int xsI = 0;
         int ysI = 0;
-        
-        result = Array.Sort((xs.Concat(ys).ToArray()));
+    
+        result = xs.Concat(ys).ToArray();
+        Array.Sort(result);
+        return result;
     }
 ```
 
