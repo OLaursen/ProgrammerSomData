@@ -52,6 +52,7 @@ let rec unique xs =
 type typ =
      | TypI                                (* integers                   *)
      | TypB                                (* booleans                   *)
+     | TypL of typ                         (* list, element type is typ  *) 
      | TypF of typ * typ                   (* (argumenttype, resulttype) *)
      | TypV of typevar                     (* type variable              *)
 
@@ -133,6 +134,7 @@ let rec typeToString t : string =
     match t with
     | TypI         -> "int"
     | TypB         -> "bool"
+    | TypL x       -> typeToString x + " List"
     | TypV _       -> failwith "typeToString impossible"
     | TypF(t1, t2) -> "function"
 

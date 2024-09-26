@@ -17,6 +17,8 @@
 ```
 
 # 5.7
+*Extend the monomorphic type checker to deal with lists:*
+
 
 # 6.1
 
