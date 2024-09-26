@@ -172,6 +172,7 @@ let ex5 = If(Prim("=", CstI 11, CstI 12), CstI 111, CstI 666);;
 
 let ex6 = Letfun("inf", "x", TypI, Call(Var "inf", Var "x"), TypI,
                  Call(Var "inf", CstI 0));;
+let ex61 = Letfun("add", "x", TypI, Letfun ("f", "y", TypI, Prim ("+", Var "x", Var "y"), TypI, Var "f"), TypI, Call (Var "add", CstI 2, CstI 5));;
 
 let types = List.map typeCheck [ex1; ex2; ex3; ex4; ex5; ex6];;
 

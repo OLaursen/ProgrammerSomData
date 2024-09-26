@@ -15,3 +15,4 @@ A. Loading evaluator and type checker for the explicitly typed language
    typeCheck exErr1;;
 
    #q;;
+   
