@@ -22,8 +22,6 @@ let pow x =  if x = 0 then 1 else 3 * pow(x - 1) in let powsum x = if x = 0 then
 
 • Compute 1^8 + 2^8 +· · ·+10^8, again using a recursive function (or two).
 
-let pow x =  if x = 0 then 1 else 3 * pow(x - 1) in let powsum x = if x = 0 then 1 else (pow x) + powsum (x-1) in powsum 11 end end
-
 let pow8 x = x*x*x*x*x*x*x*x in let sum x = if x = 1 then 1 else (pow8 x) + sum(x - 1) in sum 10 end end
 
 # 4.3
