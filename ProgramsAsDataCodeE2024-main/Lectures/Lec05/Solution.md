@@ -22,7 +22,7 @@
 
 # 5.7
 *Extend the monomorphic type checker to deal with lists:*
-
+#ASK TA
 
 # 6.1
 "let add x = let f y = x+y in f end in add 2 5 end" :
@@ -56,7 +56,8 @@ addtwo 5 -> add 2 + 5 -> 7.
 We can see that it's missing an variable(y in f y = x+y) to complete the closure, which is why it returns the closure. 
 
 # 6.2
-
+#ASK TA about precedence / why arrow is not parsed
+## 
 
 # 6.3
 
