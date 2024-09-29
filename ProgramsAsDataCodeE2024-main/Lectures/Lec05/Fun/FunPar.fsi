@@ -4,6 +4,7 @@ type token =
   | EOF
   | LPAR
   | RPAR
+  | ARROW
   | EQ
   | NE
   | GT
@@ -20,6 +21,7 @@ type token =
   | FALSE
   | IF
   | IN
+  | FUN
   | LET
   | NOT
   | THEN
@@ -31,6 +33,7 @@ type tokenId =
     | TOKEN_EOF
     | TOKEN_LPAR
     | TOKEN_RPAR
+    | TOKEN_ARROW
     | TOKEN_EQ
     | TOKEN_NE
     | TOKEN_GT
@@ -47,6 +50,7 @@ type tokenId =
     | TOKEN_FALSE
     | TOKEN_IF
     | TOKEN_IN
+    | TOKEN_FUN
     | TOKEN_LET
     | TOKEN_NOT
     | TOKEN_THEN

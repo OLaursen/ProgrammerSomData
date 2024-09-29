@@ -57,6 +57,7 @@ We can see that it's missing an variable(y in f y = x+y) to complete the closure
 
 # 6.2
 
+
 # 6.3
 
 # 6.4
