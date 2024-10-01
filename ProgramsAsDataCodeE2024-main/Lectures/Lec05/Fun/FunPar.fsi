@@ -4,7 +4,6 @@ type token =
   | EOF
   | LPAR
   | RPAR
-  | ARROW
   | EQ
   | NE
   | GT
@@ -16,12 +15,13 @@ type token =
   | TIMES
   | DIV
   | MOD
+  | FUN
+  | ARROW
   | ELSE
   | END
   | FALSE
   | IF
   | IN
-  | FUN
   | LET
   | NOT
   | THEN
@@ -33,7 +33,6 @@ type tokenId =
     | TOKEN_EOF
     | TOKEN_LPAR
     | TOKEN_RPAR
-    | TOKEN_ARROW
     | TOKEN_EQ
     | TOKEN_NE
     | TOKEN_GT
@@ -45,12 +44,13 @@ type tokenId =
     | TOKEN_TIMES
     | TOKEN_DIV
     | TOKEN_MOD
+    | TOKEN_FUN
+    | TOKEN_ARROW
     | TOKEN_ELSE
     | TOKEN_END
     | TOKEN_FALSE
     | TOKEN_IF
     | TOKEN_IN
-    | TOKEN_FUN
     | TOKEN_LET
     | TOKEN_NOT
     | TOKEN_THEN

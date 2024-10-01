@@ -41,7 +41,7 @@ let rec eval (e : expr) (env : value env) : value =
       let v1 = eval e1 env
       let v2 = eval e2 env
       match (ope, v1, v2) with
-      | ("*", Int i1, int i2) -> Int (i1 * i2)
+      | ("*", Int i1, Int i2) -> Int (i1 * i2)
       | ("+", Int i1, Int i2) -> Int (i1 + i2)
       | ("-", Int i1, Int i2) -> Int (i1 - i2)
       | ("=", Int i1, Int i2) -> Int (if i1 = i2 then 1 else 0)
