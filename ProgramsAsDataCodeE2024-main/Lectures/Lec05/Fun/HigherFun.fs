@@ -60,8 +60,7 @@ let rec eval (e : expr) (env : value env) : value =
       let bodyEnv = (f, Closure(f, x, fBody, env)) :: env
       eval letBody bodyEnv
     | Fun(x, body) ->
-      let bodyEnv = (x, Clos(x, body, env)) :: env
-      eval body bodyEnv    
+      Clos(x, body, env)
     | Call(eFun, eArg) -> 
       let fClosure = eval eFun env  (* Different from Fun.fs - to enable first class functions *)
       match fClosure with

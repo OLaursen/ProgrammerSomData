@@ -22,7 +22,7 @@
 
 # 5.7
 *Extend the monomorphic type checker to deal with lists:*
-#ASK TA
+Check TypedFun/TypedFun.fs
 
 # 6.1
 "let add x = let f y = x+y in f end in add 2 5 end" :
@@ -56,11 +56,54 @@ addtwo 5 -> add 2 + 5 -> 7.
 We can see that it's missing an variable(y in f y = x+y) to complete the closure, which is why it returns the closure. 
 
 # 6.2
-#ASK TA about precedence / why arrow is not parsed
-## 
+Look at HigherFun Eval, FunPar.fsy and FunLex.fsl
+
 
 # 6.3
+Check FunLex.fsl and FunPar.fsy
 
 # 6.4
-
+#TODO oliie
 # 6.5
+## Part 1
+
+inferType (fromString "let f x = 1 in f f end");;          
+val it: string = "int"
+
+inferType (fromString "let f g = g g in f end");;
+System.Exception: type error: circularity
+_The exception is thrown because g gets g as an argument, and therefore tries to define g as both a function
+and a variable._ 
+
+inferType (fromString "let f x = let g y = y in g false end in f 42 end");;
+val it: string = "bool"
+
+inferType (fromString "let f x = let g y = if true then y else x in g false end in f 42 end");;
+System.Exception: type error: bool and int
+_The output of g is either a bool or int, which means the return type can't be correctly typed._ 
+
+inferType (fromString "let f x = let g y = if true then y else x in g false end in f true end");;
+val it: string = "bool"
+
+## Part 2
+### bool -> bool
+let f x = if x then true else false in f end
+
+### int -> int
+let f x = x+x in f end
+
+### int -> int -> int
+let f x = let g y = x+y in g end in f end
+
+### 'a -> 'b -> 'a
+let f x = let g y = let h z = z in h x end in g end in f end
+
+### 'a -> 'b -> 'b
+let f x = let g y = y in g end in f end
+
+### ('a -> 'b) -> ('b -> c) -> ('a -> 'c)
+
+### 'a -> 'b
+let f x = x in f end
+
+### 'a
