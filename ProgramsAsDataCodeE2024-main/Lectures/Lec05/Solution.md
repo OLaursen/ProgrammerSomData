@@ -87,23 +87,29 @@ val it: string = "bool"
 
 ## Part 2
 ### bool -> bool
+
 let f x = if x then true else false in f end
 
 ### int -> int
+
 let f x = x+x in f end
 
 ### int -> int -> int
+
 let f x = let g y = x+y in g end in f end
 
-### 'a -> 'b -> 'a
+### 'a -> 'b -> 'a 
+
 let f x = let g y = let h z = z in h x end in g end in f end
 
-### 'a -> 'b -> 'b
+### 'a -> 'b -> 'b 
+
 let f x = let g y = y in g end in f end
 
 ### ('a -> 'b) -> ('b -> c) -> ('a -> 'c)
 
 ### 'a -> 'b
+
 let f x = x in f end
 
 ### 'a
