@@ -106,10 +106,18 @@ let f x = let g y = let h z = z in h x end in g end in f end
 
 let f x = let g y = y in g end in f end
 
+         f            g             h
 ### ('a -> 'b) -> ('b -> c) -> ('a -> 'c)
 
-### 'a -> 'b
+let f x =
+    let h z =
+        let g y = 
+            x (z y)
+        in g end
+    in h end 
+in f end
 
-let f x = x in f end
+### 'a -> 'b
+let f x = f x in f end
 
 ### 'a
