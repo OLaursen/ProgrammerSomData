@@ -121,5 +121,4 @@ in f end
 let f x = f x in f end
 
 ### 'a 
-returns 'f as a string?
 let y x = y x in y y end
