@@ -120,4 +120,6 @@ in f end
 ### 'a -> 'b
 let f x = f x in f end
 
-### 'a
+### 'a 
+returns 'f as a string?
+let y x = y x in y y end
