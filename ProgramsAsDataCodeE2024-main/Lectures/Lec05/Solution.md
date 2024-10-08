@@ -63,7 +63,14 @@ Look at HigherFun Eval, FunPar.fsy and FunLex.fsl
 Check FunLex.fsl and FunPar.fsy
 
 # 6.4
-#TODO oliie
+## Part 1
+F is polymorphic as it can take any type of input, due to it not using said input. At the time of variable use f will get its type. 
+![](./img/641.png)
+
+## Part 2
+A restriction on polymorphism is that a function can't be polymorphic within its own body.
+![](./img/642.png)
+
 # 6.5
 ## Part 1
 
