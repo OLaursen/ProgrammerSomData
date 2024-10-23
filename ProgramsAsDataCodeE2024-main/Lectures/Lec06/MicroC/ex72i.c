@@ -18,5 +18,4 @@ void arrsum (int n, int arr[], int *sump){
         i = i + 1;
         *sump = *sump + arr[i];
     }
-    
 }

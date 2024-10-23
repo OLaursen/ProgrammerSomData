@@ -51,4 +51,6 @@ See MicroC/ex72i.c
 ### ii
 See MicroC/ex72ii.c
 
+### iii
+See MicroC/ex72iii.c
 
