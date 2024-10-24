@@ -57,3 +57,8 @@ If we adjust the length of the freq array to lower than max, we can't track the 
 indexes expected, causing a segmantation fault.  
 
 ## Exercise 7.3
+See MicroC/CPar.fsy and MicroC/CLex.fsi
+Changes to incorporate for loops can be found at MicroC/:
+* ex73i.c
+* ex73ii.c
+* ex73iii.c
