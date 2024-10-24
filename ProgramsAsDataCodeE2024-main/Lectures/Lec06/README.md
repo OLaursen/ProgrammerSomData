@@ -55,3 +55,5 @@ See MicroC/ex72ii.c
 See MicroC/ex72iii.c
 If we adjust the length of the freq array to lower than max, we can't track the frequencey on the amount of 
 indexes expected, causing a segmantation fault.  
+
+## Exercise 7.3
