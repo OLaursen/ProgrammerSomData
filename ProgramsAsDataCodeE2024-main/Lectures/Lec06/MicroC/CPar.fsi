@@ -21,6 +21,8 @@ type token =
   | LT
   | GE
   | LE
+  | QUEST
+  | COLON
   | PREINC
   | PREDEC
   | PLUS
@@ -64,6 +66,8 @@ type tokenId =
     | TOKEN_LT
     | TOKEN_GE
     | TOKEN_LE
+    | TOKEN_QUEST
+    | TOKEN_COLON
     | TOKEN_PREINC
     | TOKEN_PREDEC
     | TOKEN_PLUS

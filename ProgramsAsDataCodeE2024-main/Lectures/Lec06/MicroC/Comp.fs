@@ -169,9 +169,9 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
     | CstI i         -> [CSTI i]
     | Addr acc       -> cAccess acc varEnv funEnv
     | PreInc acc     ->
-      cExpr acc varEnv funEnv @ [DUP; LDI; CSTI 1; ADD; STI]
+      cAccess acc varEnv funEnv @ [DUP; LDI; CSTI 1; ADD; STI]
     | PreDec acc     ->
-      cExpr acc varEnv funEnv @ [DUP; LDI; CSTI 1; SUB; STI]
+      cAccess acc varEnv funEnv @ [DUP; LDI; CSTI 1; SUB; STI]
     | Prim1(ope, e1) ->
       cExpr e1 varEnv funEnv
       @ (match ope with
@@ -195,6 +195,17 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
          | ">"   -> [SWAP; LT]
          | "<="  -> [SWAP; LT; NOT]
          | _     -> raise (Failure "unknown primitive 2"))
+    | Tern(e1, e2, e3) ->
+        let ifFalse = newLabel();
+        let labend  = newLabel();
+        cExpr e1 varEnv funEnv 
+        @ [IFZERO ifFalse]
+        @ cExpr e2 varEnv funEnv
+        @ [GOTO labend] 
+        @ [Label ifFalse]
+        @ cExpr e3 varEnv funEnv
+        @ [Label labend]
+        
     | Andalso(e1, e2) ->
       let labend   = newLabel()
       let labfalse = newLabel()

@@ -34,7 +34,7 @@ The Java stack machine:
    java Machine ex11.out 8
 
 The C stack machine
-   gcc -o machine machine.c
+    gcc -o machine machine.c
    ./machine ex11.out 8    
 
 C. To compile and use the backwards (continuation-based) micro-C compiler:

@@ -84,8 +84,21 @@ Also check ex3trace
 Check Comp.fs method Cexp
 Example to test it out is seen in ex3modifed.c
 ```
-    //Example run
-    run (fromFile "ex3modified.c") [5];;
-    0 1 2 3 4 val it: Interp.store = map [(0, 5); (1, 5)]
-
+    > compileToFile (fromFile "ex3modified.c") "ex3modified.out";;
+    val it: Machine.instr list =
+      [LDARGS; CALL (1, "L1"); STOP; Label "L1"; INCSP 1; GETBP; CSTI 1; ADD;
+       CSTI 0; STI; INCSP -1; GOTO "L3"; Label "L2"; GETBP; CSTI 1; ADD; LDI;
+       PRINTI; INCSP -1; GETBP; CSTI 1; ADD; DUP; LDI; CSTI 1; ADD; STI; INCSP -1;
+       INCSP 0; Label "L3"; GETBP; CSTI 1; ADD; LDI; GETBP; CSTI 0; ADD; LDI; LT;
+       IFNZRO "L2"; INCSP -1; RET 0]
+       
+       java Machine ex3modified.out 5
+            0 1 2 3 4 
+            Ran 0.009 seconds
 ```
+## Ex 8.4 
+Ex8.c is much slower because it first has to find the address of i, load the value of i, before it can decrement, check and store the value. 
+This results in multiple extra instructions compared to prog1, that simply takes the value at the top of the stack, duplicates it, checks if it's 0, then decrements. 
+
+## Ex 8.5
+See solution in Cpar.fsy, Clex,fsl, Comp.fs, Absyn.fs and an example used to test can be seen in ex85.c.
