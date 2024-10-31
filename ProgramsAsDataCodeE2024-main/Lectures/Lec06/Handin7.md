@@ -1,6 +1,6 @@
 # Assignment 7
 
-## 8.1
+## Ex 8.1
 
 ### Bytecode Ex3
 ```
@@ -75,4 +75,17 @@ L2:
 
 25 EOF;
 STOP;
+```
+We can see the block, or rather the scope changes the block introduces in the bytecode by observing the different positions of "r" on the stack. The block introduced "r" sits at bp+2 while the original "r" sits at b+1.
+
+Also check ex3trace
+
+## Ex 8.3
+Check Comp.fs method Cexp
+Example to test it out is seen in ex3modifed.c
+```
+    //Example run
+    run (fromFile "ex3modified.c") [5];;
+    0 1 2 3 4 val it: Interp.store = map [(0, 5); (1, 5)]
+
 ```
